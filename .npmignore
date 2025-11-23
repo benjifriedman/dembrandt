@@ -1,0 +1,52 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# CI/CD
+.github/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log
+npm-debug.log*
+
+# Output
+output/
+
+# Examples (users should check repo for these)
+examples/
+
+# Media (not needed in npm package)
+showcase.gif
+*.mp4
+*.mov
+
+# Development
+.claude/
+coverage/
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Documentation (README is needed, but not extra docs)
+docs/
+CONTRIBUTING.md
+
+# Misc
+.npmrc

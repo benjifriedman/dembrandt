@@ -106,11 +106,15 @@ program
 
           console.log(
             chalk.dim(
-              `\n💾 JSON saved to: ${chalk.cyan(`output/${domain}/${filename}`)}`
+              `\n💾 JSON saved to: ${chalk.cyan(
+                `output/${domain}/${filename}`
+              )}`
             )
           );
         } catch (err) {
-          console.log(chalk.yellow(`⚠ Could not save JSON file: ${err.message}`));
+          console.log(
+            chalk.yellow(`⚠ Could not save JSON file: ${err.message}`)
+          );
         }
       }
 

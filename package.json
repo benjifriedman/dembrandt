@@ -1,6 +1,6 @@
 {
   "name": "dembrandt",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Extract design tokens and brand assets from any website",
   "main": "index.js",
   "type": "module",
@@ -33,7 +33,7 @@
     "url": "https://github.com/thevangelist/dembrandt/issues"
   },
   "homepage": "https://github.com/thevangelist/dembrandt#readme",
-  "author": "",
+  "author": "thevangelist <info@esajuhana.com>",
   "license": "MIT",
   "dependencies": {
     "commander": "^11.1.0",

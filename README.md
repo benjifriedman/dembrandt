@@ -1,5 +1,9 @@
 # 🎨 Dembrandt
 
+[![npm version](https://img.shields.io/npm/v/dembrandt.svg)](https://www.npmjs.com/package/dembrandt)
+[![npm downloads](https://img.shields.io/npm/dm/dembrandt.svg)](https://www.npmjs.com/package/dembrandt)
+[![license](https://img.shields.io/npm/l/dembrandt.svg)](https://github.com/thevangelist/dembrandt/blob/main/LICENSE)
+
 A CLI tool for extracting design tokens and brand assets from any website. Powered by Playwright with advanced bot detection avoidance.
 
 ![Dembrandt Demo](showcase.gif)
@@ -10,7 +14,7 @@ A CLI tool for extracting design tokens and brand assets from any website. Power
 npx dembrandt stripe.com
 ```
 
-No installation required! Extract design tokens from any website in seconds.
+No installation required! Extract design tokens from any website in seconds. Or install globally with `npm install -g dembrandt`.
 
 ## What It Does
 
@@ -75,18 +79,32 @@ Recognizes Tailwind CSS, Bootstrap, Material-UI, and others by class patterns an
 
 ## Installation
 
-No installation needed! Just use `npx`:
+### Using npx (Recommended)
+
+No installation needed! Run directly with `npx`:
 
 ```bash
 npx dembrandt stripe.com
 ```
 
-The first run will automatically install Chromium.
+The first run will automatically install Chromium (~170MB).
+
+### Global Installation
+
+Install globally for repeated use:
+
+```bash
+npm install -g dembrandt
+dembrandt stripe.com
+```
 
 ### Prerequisites
+
 - Node.js 18 or higher
 
-### From Source (for development)
+### Development Setup
+
+For contributors who want to work on dembrandt:
 
 ```bash
 git clone https://github.com/thevangelist/dembrandt.git
@@ -100,25 +118,32 @@ npm link
 ### Basic Usage
 
 ```bash
+# Using npx (no installation)
 npx dembrandt <url>
 
+# Or if installed globally
+dembrandt <url>
+
 # Examples
-npx dembrandt stripe.com
-npx dembrandt https://github.com
-npx dembrandt tailwindcss.com
+dembrandt stripe.com
+dembrandt https://github.com
+dembrandt tailwindcss.com
 ```
 
 ### Options
 
 **`--json-only`** - Output raw JSON to stdout instead of formatted terminal display
+
 ```bash
-npx dembrandt stripe.com --json-only > tokens.json
+dembrandt stripe.com --json-only > tokens.json
 ```
+
 Note: JSON is automatically saved to `output/domain.com/` regardless of this flag.
 
 **`-d, --debug`** - Run with visible browser and detailed logs
+
 ```bash
-npx dembrandt stripe.com --debug
+dembrandt stripe.com --debug
 ```
 
 Useful for troubleshooting bot detection, timeouts, or extraction issues.
@@ -128,6 +153,7 @@ Useful for troubleshooting bot detection, timeouts, or extraction issues.
 ### Automatic JSON Saves
 
 Every extraction is automatically saved to `output/domain.com/YYYY-MM-DDTHH-MM-SS.json` with:
+
 - Complete design token data
 - Timestamped for version tracking
 - Organized by domain
@@ -137,6 +163,7 @@ Example: `output/stripe.com/2025-11-22T14-30-45.json`
 ### Terminal Output
 
 Clean, formatted tables showing:
+
 - Color palette with confidence ratings (with visual swatches)
 - CSS variables with color previews
 - Typography hierarchy with context
@@ -183,16 +210,16 @@ Complete extraction data for programmatic use:
 
 ```bash
 # Analyze a single site (auto-saves JSON to output/stripe.com/)
-npx dembrandt stripe.com
+dembrandt stripe.com
 
 # View saved JSON files
 ls output/stripe.com/
 
 # Output to stdout for piping
-npx dembrandt stripe.com --json-only | jq '.colors.semantic'
+dembrandt stripe.com --json-only | jq '.colors.semantic'
 
 # Debug mode for difficult sites
-npx dembrandt example.com --debug
+dembrandt example.com --debug
 ```
 
 ### Compare Competitors
@@ -200,7 +227,7 @@ npx dembrandt example.com --debug
 ```bash
 # Extract tokens from multiple competitors (auto-saved to output/)
 for site in stripe.com square.com paypal.com; do
-  npx dembrandt $site
+  dembrandt $site
 done
 
 # Compare color palettes from most recent extractions
@@ -214,7 +241,7 @@ jq '.colors.semantic' output/*/2025-11-22T*.json
 
 ```bash
 # Extract and convert to custom config format
-npx dembrandt mysite.com --json-only | jq '{
+dembrandt mysite.com --json-only | jq '{
   colors: .colors.semantic,
   fontFamily: .typography.sources,
   spacing: .spacing.commonValues
@@ -224,35 +251,43 @@ npx dembrandt mysite.com --json-only | jq '{
 ## Use Cases
 
 ### Brand Audits
+
 Extract and document your company's current design system from production websites.
 
 ### Competitive Analysis
+
 Compare design systems across competitors to identify trends and opportunities.
 
 ### Design System Migration
+
 Document legacy design tokens before migrating to a new system.
 
 ### Reverse Engineering
+
 Rebuild a brand when original design guidelines are unavailable.
 
 ### Quality Assurance
+
 Verify design consistency across different pages and environments.
 
 ## Advanced Features
 
 ### Bot Detection Avoidance
+
 - Stealth mode with anti-detection scripts
 - Automatic fallback to visible browser on detection
 - Human-like interaction simulation (mouse movement, scrolling)
 - Custom user agent and browser fingerprinting
 
 ### Smart Retry Logic
+
 - Automatic retry on navigation failures (up to 2 attempts)
 - SPA hydration detection and waiting
 - Content validation to ensure page is fully loaded
 - Detailed progress logging at each step
 
 ### Comprehensive Logging
+
 - Real-time spinner with step-by-step progress
 - Detailed extraction metrics (colors found, styles detected, etc.)
 - Error context with URL, stage, and attempt information
@@ -261,20 +296,27 @@ Verify design consistency across different pages and environments.
 ## Troubleshooting
 
 ### Bot Detection Issues
+
 If you encounter timeouts or network errors:
+
 ```bash
-npx dembrandt example.com --debug
+dembrandt example.com --debug
 ```
+
 This will automatically retry with a visible browser.
 
 ### Page Not Loading
+
 Some sites require longer load times. The tool waits 8 seconds for SPA hydration, but you can modify this in the source.
 
 ### Empty Content
+
 If content length is < 500 chars, the tool will automatically retry (up to 2 attempts).
 
 ### Debug Mode
+
 Use `--debug` to see:
+
 - Browser launch confirmation
 - Step-by-step progress logs
 - Full error stack traces
@@ -318,6 +360,7 @@ Dembrandt extracts publicly available design information (colors, fonts, spacing
 ## Contributing
 
 Issues and pull requests welcome. Please include:
+
 - Clear description of the issue/feature
 - Example URLs that demonstrate the problem
 - Expected vs actual behavior
